@@ -1,7 +1,8 @@
 import * as gcodify from 'gcodify'
 import * as path from 'path'
+import * as fs from 'fs'
 
-export default async function processor (selection) {
+export async function processor (selection) {
   const outputFilename = 'preview' + Math.random();
   const absPath = path.join(__static, outputFilename);
 
@@ -35,3 +36,8 @@ export default async function processor (selection) {
 
   return outputFilename;
 };
+
+export function getBase64Image(filename) {
+  const b64 = fs.readFileSync(filename).toString('base64');
+  return `data:image/jpg;base64,${b64}`;
+}

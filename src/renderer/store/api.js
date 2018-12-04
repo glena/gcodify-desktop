@@ -14,10 +14,6 @@ export default store => next => {
 
     if (action.type === 'LOAD') {
       return ipcRenderer.send('asynchronous-message', action)
-      // const selection = remote.dialog.showOpenDialog({ filters: [{name: 'Images', extensions:['png', 'jpg']}], properties: ['openFile'] });
-      // if (selection.length!== 0) {
-      //   action.result = selection[0];
-      // }
     }
 
     return next(action)

@@ -1,17 +1,20 @@
 import React from 'react';
-import * as path from 'path'
 import { connect } from 'react-redux'
-import * as fs from "fs";
+import { toggleViewOriginal } from '../actions'
 
 const mapStateToProps = state => {
-  const logo = state.image && fs.readFileSync(path.join(__static, state.image)).toString('base64');
+  console.log(state)
   return {
-    image: 'data:image/jpg;base64,' + logo
+    image: state.showOriginal ? state.original : state.preview
   }
 }
 
-const Preview = ({image}) => (
-  <img src={image} />
+const mapDispatchToProps = (dispatch) => ({
+  onClick: () => dispatch(toggleViewOriginal())
+})
+
+const Preview = ({image, onClick}) => (
+  <img src={image} onClick={onClick} style={{width: '100px'}} />
 );
 
-export default connect( mapStateToProps )(Preview)
+export default connect( mapStateToProps, mapDispatchToProps )(Preview)

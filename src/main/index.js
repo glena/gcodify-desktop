@@ -3,7 +3,7 @@
 import { app, BrowserWindow, ipcMain, dialog } from 'electron'
 import * as path from 'path'
 import { format as formatUrl } from 'url'
-import processor from './lib/processor'
+import { processor, getBase64Image } from './lib/processor'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -67,10 +67,13 @@ ipcMain.on('asynchronous-message', (event, action) => {
     const selection = dialog.showOpenDialog({ filters: [{name: 'Images', extensions:['png', 'jpg']}], properties: ['openFile'] });
     
     if (selection.length!== 0) {
-      processor(selection[0]).then((filename) => {
-        action.result = filename;
-        event.sender.send('asynchronous-reply', action)
-      })
+      processor(selection[0])
+        .then((filename) => {
+          action.preview = getBase64Image(path.join(__static, filename));
+          action.original = getBase64Image(selection[0]);
+          event.sender.send('asynchronous-reply', action)
+        })
+        .catch((err) => console.error(err))
     }
     return;
   }

@@ -7,7 +7,13 @@ const reducers = (state = [], action) => {
 
     case 'LOAD':
       return Object.assign({}, state, {
-        image: action.result
+        preview: action.preview,
+        original: action.original,
+      })
+    
+    case 'TOGGLE_PREVIEW':
+      return Object.assign({}, state, {
+        showOriginal: !state.showOriginal
       })
 
     default:
