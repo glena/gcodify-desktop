@@ -6,7 +6,7 @@ import PingButton from './PingButton'
 
 const App = () => (
   <div>
-    <Pane><h1>Hello, Electron!</h1></Pane>
+    <Pane><h1>Hello, Natucha!</h1></Pane>
     <Pane><PingButton></PingButton></Pane>
     <Pane><Preview></Preview></Pane>
   </div>

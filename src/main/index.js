@@ -1,8 +1,9 @@
 'use strict'
 
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain, dialog } from 'electron'
 import * as path from 'path'
 import { format as formatUrl } from 'url'
+import processor from './lib/processor'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -61,8 +62,18 @@ app.on('ready', () => {
   mainWindow = createMainWindow()
 })
 
-ipcMain.on('asynchronous-message', (event, arg) => {
-  const response ='pong ' + Math.random();
-  console.log(response)
-  event.sender.send('asynchronous-reply', response)
+ipcMain.on('asynchronous-message', (event, action) => {
+  if (action.type === 'LOAD') {
+    const selection = dialog.showOpenDialog({ filters: [{name: 'Images', extensions:['png', 'jpg']}], properties: ['openFile'] });
+    
+    if (selection.length!== 0) {
+      processor(selection[0]).then((filename) => {
+        action.result = filename;
+        event.sender.send('asynchronous-reply', action)
+      })
+    }
+    return;
+  }
+  action.result ='TOLON ' + Math.random();
+  event.sender.send('asynchronous-reply', action)
 })

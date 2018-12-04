@@ -11,7 +11,7 @@ root.id = 'root'
 document.body.appendChild(root)
 
 const store = configureStore({
-  buttonContent: 'ping'
+  buttonContent: 'Tolon'
 })
 
 

@@ -1,17 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import Button from '../components/Button'
-import { ping } from '../actions'
+import { load } from '../actions'
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     buttonContent: state.buttonContent
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  onClick: () => dispatch(ping())
+  onClick: () => dispatch(load())
 })
 
 

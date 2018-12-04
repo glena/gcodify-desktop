@@ -1,4 +1,18 @@
-import ping from './ping'
+const reducers = (state = [], action) => {
+  switch (action.type) {
+    case 'PING':
+      return Object.assign({}, state, {
+        buttonContent: action.result
+      })
 
+    case 'LOAD':
+      return Object.assign({}, state, {
+        image: action.result
+      })
 
-export default ping
+    default:
+      return state
+  }
+}
+
+export default reducers
