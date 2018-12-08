@@ -11,7 +11,9 @@ root.id = 'root'
 document.body.appendChild(root)
 
 const store = configureStore({
-  buttonContent: 'Tolon'
+  pixelThreshold: 128,
+  imageContrast: 0,
+  imageBrighness: 0,
 })
 
 

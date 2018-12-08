@@ -2,20 +2,22 @@ import {ipcRenderer, remote} from 'electron'
 
 export default store => next => {
   ipcRenderer.on('asynchronous-reply', (event, arg) => {
-    console.log(arg)
     return next(arg)
   })
 
   return action => {
+    const state = store.getState();
 
-    if (action.type === 'PING') {
-      return ipcRenderer.send('asynchronous-message', action)      
+    switch(action.type) {
+      case 'RELOAD':
+      case 'LOAD':
+        action.originalFilename = state.originalFilename;
+        action.pixelThreshold = state.pixelThreshold;
+        action.imageContrast = state.imageContrast;
+        action.imageBrighness = state.imageBrighness;
+        return ipcRenderer.send('asynchronous-message', action);
+      default:
+        return next(action);
     }
-
-    if (action.type === 'LOAD') {
-      return ipcRenderer.send('asynchronous-message', action)
-    }
-
-    return next(action)
   }
 }

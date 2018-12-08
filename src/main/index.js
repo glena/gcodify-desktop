@@ -62,21 +62,31 @@ app.on('ready', () => {
   mainWindow = createMainWindow()
 })
 
+function preprocess(event, action) {
+  processor(action.originalFilename, action)
+    .then((previewFilename) => { 
+      action.preview = getBase64Image(path.join(__static, previewFilename));
+      action.original = getBase64Image(action.originalFilename);
+      event.sender.send('asynchronous-reply', action)
+    })
+    .catch((err) => console.error(err))
+}
+
 ipcMain.on('asynchronous-message', (event, action) => {
+  console.log(action);
+
   if (action.type === 'LOAD') {
     const selection = dialog.showOpenDialog({ filters: [{name: 'Images', extensions:['png', 'jpg']}], properties: ['openFile'] });
     
     if (selection.length!== 0) {
-      processor(selection[0])
-        .then((filename) => {
-          action.preview = getBase64Image(path.join(__static, filename));
-          action.original = getBase64Image(selection[0]);
-          event.sender.send('asynchronous-reply', action)
-        })
-        .catch((err) => console.error(err))
+      action.originalFilename = selection[0];
+      preprocess(event, action)
     }
     return;
   }
-  action.result ='TOLON ' + Math.random();
-  event.sender.send('asynchronous-reply', action)
+
+  if (action.type === 'RELOAD') {
+    preprocess(event, action)
+    return;
+  }
 })

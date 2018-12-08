@@ -2,7 +2,7 @@ import * as gcodify from 'gcodify'
 import * as path from 'path'
 import * as fs from 'fs'
 
-export async function processor (selection) {
+export async function processor (filename, opts) {
   const outputFilename = 'preview' + Math.random();
   const absPath = path.join(__static, outputFilename);
 
@@ -22,16 +22,16 @@ export async function processor (selection) {
     laserSpeed: 10,
     travelSpeed: 200,
 
-    filename: selection,
+    filename: filename,
 
     preview: true,
     debug: false,
     outputFilename: absPath,
 
-    pixelThreshold: 128,
+    pixelThreshold: opts.pixelThreshold,
     imageQuality: 60,
-    imageBrighness: undefined,
-    imageContrast: undefined,
+    imageBrighness: opts.imageBrighness,
+    imageContrast: opts.imageContrast,
   });
 
   return outputFilename;

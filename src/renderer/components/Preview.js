@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { toggleViewOriginal } from '../actions'
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     image: state.showOriginal ? state.original : state.preview
   }
