@@ -64,29 +64,41 @@ app.on('ready', () => {
 
 function preprocess(event, action) {
   processor(action.originalFilename, action)
-    .then((previewFilename) => { 
-      action.preview = getBase64Image(path.join(__static, previewFilename));
-      action.original = getBase64Image(action.originalFilename);
+    .then((previewFilename) => {
+      if (previewFilename) {
+        action.preview = getBase64Image(path.join(__static, previewFilename));
+        action.original = getBase64Image(action.originalFilename);
+      } 
       event.sender.send('asynchronous-reply', action)
     })
     .catch((err) => console.error(err))
 }
 
 ipcMain.on('asynchronous-message', (event, action) => {
-  console.log(action);
-
   if (action.type === 'LOAD') {
     const selection = dialog.showOpenDialog({ filters: [{name: 'Images', extensions:['png', 'jpg']}], properties: ['openFile'] });
     
     if (selection.length!== 0) {
       action.originalFilename = selection[0];
+      action.preview = true;
       preprocess(event, action)
     }
     return;
   }
 
   if (action.type === 'RELOAD') {
+    action.preview = true;
     preprocess(event, action)
+    return;
+  }
+
+  if (action.type === 'SAVE') {
+    const selection = dialog.showSaveDialog({ filters: [{name: 'GCODE', extensions:['gcode']}]})
+    if (selection) {
+      action.outputFilename = selection;
+      action.preview = false;
+      preprocess(event, action)
+    }
     return;
   }
 })

@@ -3,8 +3,16 @@ import * as path from 'path'
 import * as fs from 'fs'
 
 export async function processor (filename, opts) {
-  const outputFilename = 'preview' + Math.random();
-  const absPath = path.join(__static, outputFilename);
+  let absPath;
+  let outputFilename;
+
+  if (opts.outputFilename) {
+    absPath = opts.outputFilename;
+    outputFilename = null;
+  } else {
+    outputFilename = 'preview' + Math.random();
+    absPath = path.join(__static, outputFilename);
+  }
 
   await gcodify({
     xOffset: 28,
@@ -24,7 +32,7 @@ export async function processor (filename, opts) {
 
     filename: filename,
 
-    preview: true,
+    preview: opts.preview,
     debug: false,
     outputFilename: absPath,
 

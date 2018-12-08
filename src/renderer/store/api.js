@@ -11,6 +11,7 @@ export default store => next => {
     switch(action.type) {
       case 'RELOAD':
       case 'LOAD':
+      case 'SAVE':
         action.originalFilename = state.originalFilename;
         action.pixelThreshold = state.pixelThreshold;
         action.imageContrast = state.imageContrast;

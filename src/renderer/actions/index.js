@@ -10,6 +10,12 @@ export const reload = () => {
   }
 };
 
+export const save = () => {
+  return {
+    type: 'SAVE'
+  }
+};
+
 const attrCast = {
   pixelThreshold: parseInt,
   imageContrast: parseFloat,

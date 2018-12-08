@@ -1,11 +1,13 @@
 const reducers = (state = [], action) => {
   switch (action.type) {    
     case 'CHANGE':
-    console.log(Object.assign({}, state, {
-      [action.attribute]: action.value
-    }))
       return Object.assign({}, state, {
         [action.attribute]: action.value
+      })
+
+    case 'SAVE':
+      return Object.assign({}, state, {
+        succes: true
       })
 
     case 'LOAD':
