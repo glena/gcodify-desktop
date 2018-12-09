@@ -2,7 +2,8 @@ const reducers = (state = [], action) => {
   switch (action.type) {    
     case 'CHANGE':
       return Object.assign({}, state, {
-        [action.attribute]: action.value
+        [action.attribute]: action.value,
+        upToDate: false
       })
 
     case 'SAVE':
@@ -16,6 +17,7 @@ const reducers = (state = [], action) => {
         preview: action.preview,
         original: action.original,
         originalFilename: action.originalFilename,
+        upToDate: true
       })
     
     case 'TOGGLE_PREVIEW':

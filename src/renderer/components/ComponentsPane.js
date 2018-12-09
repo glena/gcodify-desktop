@@ -11,6 +11,8 @@ const mapStateToProps = state => {
     imageContrast: state.imageContrast,
     imageBrighness: state.imageBrighness,
     pixelThreshold: state.pixelThreshold,
+    isLoaded: !!state.originalFilename,
+    upToDate: state.upToDate,
   }
 }
 
@@ -23,19 +25,33 @@ const mapDispatchToProps = (dispatch) => ({
   onChangeThreshold: (e) => dispatch(change('pixelThreshold', e.target.value)),
 })
 
+function LoadButton({isLoaded, onClick}) {
+  if (isLoaded) return null;
+  return (<Button onClick={onClick}>Load</Button>);
+}
+function ReloadButton({isLoaded, upToDate, onClick}) {
+  if (!isLoaded) return null;
+  return (<Button disabled={upToDate} onClick={onClick}>Reload</Button>);
+}
+function SaveButton({isLoaded, upToDate, onClick}) {
+  if (!isLoaded) return null;
+  return (<Button disabled={!upToDate} onClick={onClick}>Save</Button>);
+}
+
 const ComponentsPane = ({
+  isLoaded, upToDate,
   pixelThreshold, imageContrast, imageBrighness, 
   onChangeBrightness, onChangeContrast, onChangeThreshold, 
-  onClickLoad, onClickReload, onClickSave,
+  onClickLoad, onClickReload, onClickSave, 
 }) => (
   <div>
     <Pane>
       <div>Brighness <Slider min={-1} max={1} value={imageBrighness} step={0.1} onChange={onChangeBrightness}></Slider> {imageBrighness}</div>
       <div>Contrast <Slider min={-1} max={1} value={imageContrast} step={0.1} onChange={onChangeContrast} ></Slider> {imageContrast}</div>
       <div>Pixel Threshold <Slider min={0} max={255} value={pixelThreshold} step={1} onChange={onChangeThreshold} ></Slider> {pixelThreshold}</div>
-      <div>Load <Button onClick={onClickLoad}>Load</Button></div>
-      <div>Reload <Button onClick={onClickReload}>Reload</Button></div>
-      <div>Save <Button onClick={onClickSave}>Save</Button></div>
+      <LoadButton isLoaded={isLoaded} onClick={onClickLoad}></LoadButton>
+      <ReloadButton isLoaded={isLoaded} upToDate={upToDate} onClick={onClickReload}></ReloadButton>
+      <SaveButton isLoaded={isLoaded} upToDate={upToDate} onClick={onClickSave}></SaveButton>
     </Pane>
   </div>
 );

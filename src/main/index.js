@@ -78,7 +78,7 @@ ipcMain.on('asynchronous-message', (event, action) => {
   if (action.type === 'LOAD') {
     const selection = dialog.showOpenDialog({ filters: [{name: 'Images', extensions:['png', 'jpg']}], properties: ['openFile'] });
     
-    if (selection.length!== 0) {
+    if (selection && selection.length > 0) {
       action.originalFilename = selection[0];
       action.preview = true;
       preprocess(event, action)

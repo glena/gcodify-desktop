@@ -1,14 +1,12 @@
 
-import React from 'react';
-import Pane from './Pane'
-import Preview from './Preview'
+import React from 'react'
+import PreviewPane from './PreviewPane'
 import ComponentsPane from './ComponentsPane'
 
 const App = () => (
   <div>
-    <Pane><h1>GCODify</h1></Pane>
+    <PreviewPane></PreviewPane>
     <ComponentsPane></ComponentsPane>
-    <Pane><Preview></Preview></Pane>
   </div>
 );
 
