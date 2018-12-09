@@ -15,20 +15,20 @@ export async function processor (filename, opts) {
   }
 
   await gcodify({
-    xOffset: 28,
-    yOffset: 16,
-    zOffset: 90,
+    xOffset: opts.xOffset,
+    yOffset: opts.yOffset,
+    zOffset: opts.zOffset,
 
-    width: 50, 
-    height: undefined, 
+    width: opts.isResized && opts.width || undefined, 
+    height: opts.isResized && opts.height || undefined, 
 
-    laserPrecision: 0.1, 
+    laserPrecision: opts.laserPrecision, 
     
-    laserOnCode: 'M106',
-    laserOffCode: 'M107',
+    laserOnCode: opts.laserOnCode,
+    laserOffCode: opts.laserOffCode,
 
-    laserSpeed: 10,
-    travelSpeed: 200,
+    laserSpeed: opts.laserSpeed,
+    travelSpeed: opts.travelSpeed,
 
     filename: filename,
 

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Pane from '../components/Pane'
 import Image from '../components/Image'
 
+import { toggleViewOriginal } from '../actions'
 
 const mapStateToProps = state => {
   return {

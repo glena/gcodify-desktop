@@ -14,6 +14,17 @@ const store = configureStore({
   pixelThreshold: 128,
   imageContrast: 0,
   imageBrighness: 0,
+  isResized: false,
+  height: '',
+  width: '',
+  laserPrecision: 0.1,  
+  laserOnCode: 'M106',
+  laserOffCode: 'M107',
+  laserSpeed: 10,
+  travelSpeed: 200,
+  xOffset: 28,
+  yOffset: 16,
+  zOffset: 90,
 })
 
 

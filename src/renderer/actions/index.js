@@ -1,7 +1,17 @@
 const attrCast = {
   pixelThreshold: parseInt,
   imageContrast: parseFloat,
-  imageBrighness: parseFloat
+  imageBrighness: parseFloat,
+  height: parseInt,
+  width: parseInt,
+  laserSpeed: parseInt,
+  travelSpeed: parseInt,
+  laserPrecision: parseFloat,
+  laserOnCode: (value) => value,
+  laserOffCode: (value) => value,
+  xOffset: parseFloat, 
+  yOffset: parseFloat, 
+  zOffset: parseFloat,
 }
 
 export const load = () => ({ type: 'LOAD'});
