@@ -25,6 +25,8 @@
     "electron": "3.0.10",
     "electron-builder": "^20.36.2",
     "electron-webpack": "^2.6.1",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
     "webpack": "^4.26.0"
   }
 }

@@ -1,33 +1,26 @@
+const mappers = {
+  CHANGE: (action) => ({ [action.attribute]: action.value, upToDate: false }),
+  RESIZE: (action) => ({ isResized: action.value }),
+  SAVE: (action) => ({ succes: true }), //TODO
+  LOAD: (action) => ( {
+    preview: action.preview,
+    original: action.original,
+    originalFilename: action.originalFilename,
+    upToDate: true
+  }),
+  RELOAD: (action) => ( {
+    preview: action.preview,
+    original: action.original,
+    originalFilename: action.originalFilename,
+    upToDate: true
+  }),
+  TOGGLE_PREVIEW: (action, state) => ({ showOriginal: !state.showOriginal} )
+}
+
 const reducers = (state = [], action) => {
-  switch (action.type) {    
-    case 'CHANGE':
-      return Object.assign({}, state, {
-        [action.attribute]: action.value,
-        upToDate: false
-      })
-
-    case 'SAVE':
-      return Object.assign({}, state, {
-        succes: true
-      })
-
-    case 'LOAD':
-    case 'RELOAD':
-      return Object.assign({}, state, {
-        preview: action.preview,
-        original: action.original,
-        originalFilename: action.originalFilename,
-        upToDate: true
-      })
-    
-    case 'TOGGLE_PREVIEW':
-      return Object.assign({}, state, {
-        showOriginal: !state.showOriginal
-      })
-
-    default:
-      return state
-  }
+  const mapper = mappers[action.type];
+  if (!mapper) { return state; }
+  return Object.assign({}, state, mapper(action, state));
 }
 
 export default reducers

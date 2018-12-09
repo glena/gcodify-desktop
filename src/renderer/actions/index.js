@@ -1,37 +1,16 @@
-export const load = () => {
-  return {
-    type: 'LOAD'
-  }
-};
-
-export const reload = () => {
-  return {
-    type: 'RELOAD'
-  }
-};
-
-export const save = () => {
-  return {
-    type: 'SAVE'
-  }
-};
-
 const attrCast = {
   pixelThreshold: parseInt,
   imageContrast: parseFloat,
   imageBrighness: parseFloat
 }
 
-export const change = (attribute, value) => {
-  return {
-    type: 'CHANGE',
-    attribute,  
-    value: attrCast[attribute](value)
-  }
-};
-
-export const toggleViewOriginal = () => {
-  return {
-    type: 'TOGGLE_PREVIEW'
-  }
-};
+export const load = () => ({ type: 'LOAD'});
+export const reload = () => ({ type: 'RELOAD' });
+export const resize = (value) => ({ type: 'RESIZE', value });
+export const save = () => ({ type: 'SAVE' });
+export const change = (attribute, value) => ({
+  type: 'CHANGE',
+  attribute,  
+  value: attrCast[attribute](value)
+});
+export const toggleViewOriginal = () => ({ type: 'TOGGLE_PREVIEW' });
