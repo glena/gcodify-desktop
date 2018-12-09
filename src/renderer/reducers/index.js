@@ -14,7 +14,7 @@ const mappers = {
     originalFilename: action.originalFilename,
     upToDate: true
   }),
-  TOGGLE_PREVIEW: (action, state) => ({ showOriginal: !state.showOriginal} )
+  TOGGLE_PREVIEW: (action) => ({ showOriginal: action.value} )
 }
 
 const reducers = (state = [], action) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Image = ({src, onClick}) => (
-  <img src={src} onClick={onClick} />
+const Image = ({src, onMouseEnter, onMouseLeave}) => (
+  <img src={src} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} />
 );
 
 export default Image

@@ -23,4 +23,5 @@ export const change = (attribute, value) => ({
   attribute,  
   value: attrCast[attribute](value)
 });
-export const toggleViewOriginal = () => ({ type: 'TOGGLE_PREVIEW' });
+export const viewOriginal  = () => ({ type: 'TOGGLE_PREVIEW', value: true });
+export const viewPreview = () => ({ type: 'TOGGLE_PREVIEW', value: false });

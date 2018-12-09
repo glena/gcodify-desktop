@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import Pane from '../components/Pane'
 import Image from '../components/Image'
 
-import { toggleViewOriginal } from '../actions'
+import { viewOriginal, viewPreview } from '../actions'
 
 const mapStateToProps = state => {
   return {
@@ -14,12 +14,13 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  onClick: () => dispatch(toggleViewOriginal())
+  onMouseEnter: () => dispatch(viewOriginal()),
+  onMouseLeave: () => dispatch(viewPreview())
 })
 
-const PreviewPane = ({image, onClick}) => (
+const PreviewPane = ({image, onMouseEnter, onMouseLeave}) => (
   <Pane className="preview">
-    <Image src={image} onClick={onClick}></Image>
+    <Image src={image} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}></Image>
   </Pane>
 );
 
