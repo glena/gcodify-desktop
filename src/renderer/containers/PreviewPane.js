@@ -20,6 +20,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const PreviewPane = ({image, onMouseEnter, onMouseLeave}) => (
   <Pane className="preview">
+    <div class="origin">(0,0)</div>
     <Image src={image} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}></Image>
   </Pane>
 );
