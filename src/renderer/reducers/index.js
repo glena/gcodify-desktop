@@ -1,8 +1,8 @@
 const mappers = {
   CHANGE: (action) => ({ [action.attribute]: action.value, upToDate: false }),
   RESIZE: (action) => ({ isResized: action.value }),
-  SAVE: (action) => ({ succes: true }), //TODO
-  LOAD: (action) => ( {
+  SAVE: () => ({ succes: true }), //TODO
+  LOAD: (action) => ({
     preview: action.preview,
     original: action.original,
     originalFilename: action.originalFilename,
@@ -15,12 +15,12 @@ const mappers = {
     upToDate: true
   }),
   TOGGLE_PREVIEW: (action) => ({ showOriginal: action.value} )
-}
+};
 
 const reducers = (state = [], action) => {
   const mapper = mappers[action.type];
   if (!mapper) { return state; }
   return Object.assign({}, state, mapper(action, state));
-}
+};
 
-export default reducers
+export default reducers;

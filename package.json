@@ -5,6 +5,7 @@
   "author": "Germán Lena <german.lena@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "lint": "eslint .",
     "dev": "electron-webpack dev",
     "compile": "electron-webpack",
     "dist": "yarn compile && electron-builder",
@@ -23,9 +24,12 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.1",
     "electron": "3.0.10",
     "electron-builder": "^20.36.2",
     "electron-webpack": "^2.6.1",
+    "eslint": "^5.11.1",
+    "eslint-plugin-react": "^7.12.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "webpack": "^4.26.0"

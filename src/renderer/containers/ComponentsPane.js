@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 import Pane from '../components/Pane';
 import Slider from '../components/Slider';
@@ -8,7 +8,7 @@ import Button from '../components/Button';
 
 import SizePane from './SizePane';
 
-import { change, load, reload, save } from '../actions'
+import { change, load, reload, save } from '../actions';
 
 const mapStateToProps = state => {
   return {
@@ -17,8 +17,8 @@ const mapStateToProps = state => {
     pixelThreshold: state.pixelThreshold,
     isLoaded: !!state.originalFilename,
     upToDate: state.upToDate,
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   onClickLoad: () => dispatch(load()),
@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch) => ({
   onChangeBrightness: (e) => dispatch(change('imageBrighness', e.target.value)),
   onChangeContrast: (e) => dispatch(change('imageContrast', e.target.value)),
   onChangeThreshold: (e) => dispatch(change('pixelThreshold', e.target.value)),
-})
+});
 
 function LoadButton({isLoaded, onClick}) {
   if (isLoaded) return null;
@@ -59,4 +59,4 @@ const ComponentsPane = ({
   </Pane>
 );
 
-export default connect( mapStateToProps, mapDispatchToProps )(ComponentsPane)
+export default connect( mapStateToProps, mapDispatchToProps )(ComponentsPane);

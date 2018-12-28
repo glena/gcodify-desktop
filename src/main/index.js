@@ -1,104 +1,75 @@
-'use strict'
+'use strict';
 
-import { app, BrowserWindow, ipcMain, dialog } from 'electron'
-import * as path from 'path'
-import { format as formatUrl } from 'url'
-import { processor, getBase64Image } from './lib/processor'
+/* global process */
+/* global __dirname */
+/* global setImmediate */
 
-const isDevelopment = process.env.NODE_ENV !== 'production'
+import { app, BrowserWindow, ipcMain } from 'electron';
+import * as path from 'path';
+import { format as formatUrl } from 'url';
+import { load, reload, save } from './lib/actions';
+
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 // global reference to mainWindow (necessary to prevent window from being garbage collected)
-let mainWindow
+let mainWindow;
 
 function createMainWindow() {
-  const window = new BrowserWindow()
+  const window = new BrowserWindow();
 
   if (isDevelopment) {
-    window.webContents.openDevTools()
+    window.webContents.openDevTools();
   }
 
   if (isDevelopment) {
-    window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
+    window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`);
   }
   else {
     window.loadURL(formatUrl({
       pathname: path.join(__dirname, 'index.html'),
       protocol: 'file',
       slashes: true
-    }))
+    }));
   }
 
   window.on('closed', () => {
-    mainWindow = null
-  })
+    mainWindow = null;
+  });
 
   window.webContents.on('devtools-opened', () => {
-    window.focus()
+    window.focus();
     setImmediate(() => {
-      window.focus()
-    })
-  })
+      window.focus();
+    });
+  });
 
-  return window
+  return window;
 }
 
 // quit application when all windows are closed
 app.on('window-all-closed', () => {
   // on macOS it is common for applications to stay open until the user explicitly quits
   if (process.platform !== 'darwin') {
-    app.quit()
+    app.quit();
   }
-})
+});
 
 app.on('activate', () => {
   // on macOS it is common to re-create a window even after all windows have been closed
   if (mainWindow === null) {
-    mainWindow = createMainWindow()
+    mainWindow = createMainWindow();
   }
-})
+});
 
 // create main BrowserWindow when electron is ready
 app.on('ready', () => {
-  mainWindow = createMainWindow()
-})
-
-function preprocess(event, action) {
-  processor(action.originalFilename, action)
-    .then((previewFilename) => {
-      if (previewFilename) {
-        action.preview = getBase64Image(path.join(__static, previewFilename));
-        action.original = getBase64Image(action.originalFilename);
-      } 
-      event.sender.send('asynchronous-reply', action)
-    })
-    .catch((err) => console.error(err))
-}
+  mainWindow = createMainWindow();
+});
 
 ipcMain.on('asynchronous-message', (event, action) => {
-  if (action.type === 'LOAD') {
-    const selection = dialog.showOpenDialog({ filters: [{name: 'Images', extensions:['png', 'jpg']}], properties: ['openFile'] });
-    
-    if (selection && selection.length > 0) {
-      action.originalFilename = selection[0];
-      action.preview = true;
-      preprocess(event, action)
-    }
-    return;
+  switch (action.type) {
+  case 'LOAD': return load(event, action);
+  case 'RELOAD': return reload(event, action);
+  case 'SAVE': return save(event, action);
   }
-
-  if (action.type === 'RELOAD') {
-    action.preview = true;
-    preprocess(event, action)
-    return;
-  }
-
-  if (action.type === 'SAVE') {
-    const selection = dialog.showSaveDialog({ filters: [{name: 'GCODE', extensions:['gcode']}]})
-    if (selection) {
-      action.outputFilename = selection;
-      action.preview = false;
-      preprocess(event, action)
-    }
-    return;
-  }
-})
+});

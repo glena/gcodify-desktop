@@ -1,16 +1,16 @@
 
 import React from 'react';
-import { connect } from 'react-redux'
-import { pick } from 'lodash'
+import { connect } from 'react-redux';
+import { pick } from 'lodash';
 
 import Pane from '../components/Pane';
-import Input from '../components/Input'
+import Input from '../components/Input';
 
-import { change } from '../actions'
+import { change } from '../actions';
 
 const mapStateToProps = state => {
   return pick(state, ['laserPrecision', 'laserOnCode', 'laserOffCode', 'laserSpeed', 'travelSpeed']);
-}
+};
 
 const mapDispatchToProps = (dispatch) => ({
   onLaserPrecisionChange: (e) => dispatch(change('laserPrecision', e.target.value)),
@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
   laserOffCodeChange: (e) => dispatch(change('laserOffCode', e.target.value)),
   laserSpeedChange: (e) => dispatch(change('laserSpeed', e.target.value)),
   travelSpeedChange: (e) => dispatch(change('travelSpeed', e.target.value)),
-})
+});
 
 function InputField({label, value, onChange}) {
   return (<div>
@@ -39,4 +39,4 @@ const PreviewPane = ({
   </Pane>
 );
 
-export default connect( mapStateToProps, mapDispatchToProps )(PreviewPane)
+export default connect( mapStateToProps, mapDispatchToProps )(PreviewPane);

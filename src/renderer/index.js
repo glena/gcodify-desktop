@@ -1,14 +1,14 @@
-import React from 'react'
-import { render } from 'react-dom'
-import App from './containers/App'
+import React from 'react';
+import { render } from 'react-dom';
+import App from './containers/App';
 
-import configureStore from './store'
-import { Provider } from 'react-redux'
+import configureStore from './store';
+import { Provider } from 'react-redux';
 
-let root = document.createElement('div')
+let root = document.createElement('div');
 
-root.id = 'root'
-document.body.appendChild(root)
+root.id = 'root';
+document.body.appendChild(root);
 
 const store = configureStore({
   pixelThreshold: 128,
@@ -25,9 +25,9 @@ const store = configureStore({
   xOffset: 28,
   yOffset: 16,
   zOffset: 90,
-})
+});
 
 
 render(<Provider store={store}>
   <App />
-</Provider>, document.getElementById('root'))
+</Provider>, document.getElementById('root'));

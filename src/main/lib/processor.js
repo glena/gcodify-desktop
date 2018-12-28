@@ -1,6 +1,8 @@
-import * as gcodify from 'gcodify'
-import * as path from 'path'
-import * as fs from 'fs'
+/* global __static */
+
+import * as gcodify from 'gcodify';
+import * as path from 'path';
+import * as fs from 'fs';
 
 export async function processor (filename, opts) {
   let absPath;
@@ -14,7 +16,7 @@ export async function processor (filename, opts) {
     absPath = path.join(__static, outputFilename);
   }
 
-  await gcodify({
+  const output = await gcodify({
     xOffset: opts.xOffset,
     yOffset: opts.yOffset,
     zOffset: opts.zOffset,
@@ -42,8 +44,12 @@ export async function processor (filename, opts) {
     imageContrast: opts.imageContrast,
   });
 
-  return outputFilename;
-};
+  return { 
+    outputFilename,
+    width: output.width,
+    height: output.height
+  };
+}
 
 export function getBase64Image(filename) {
   const b64 = fs.readFileSync(filename).toString('base64');

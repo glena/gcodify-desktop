@@ -1,19 +1,19 @@
 
 import React from 'react';
-import { connect } from 'react-redux'
-import { pick } from 'lodash'
+import { connect } from 'react-redux';
+import { pick } from 'lodash';
 
 import Pane from '../components/Pane';
-import Input from '../components/Input'
-import Checkbox from '../components/Checkbox'
+import Input from '../components/Input';
+import Checkbox from '../components/Checkbox';
 
-import { resize, change } from '../actions'
+import { resize, change } from '../actions';
 
 const mapStateToProps = state => {
   return Object.assign({
     isResized: state.isResized,
   }, pick(state, ['height', 'width', 'xOffset', 'yOffset', 'zOffset']));
-}
+};
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeResize: (e) => dispatch(resize(e.target.checked)),
@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch) => ({
   onXOffsetChange: (e) => dispatch(change('xOffset', e.target.value)),
   onYOffsetChange: (e) => dispatch(change('yOffset', e.target.value)),
   onZOffsetChange: (e) => dispatch(change('zOffset', e.target.value)),
-})
+});
 
 function InputField({label, value, onChange, isVisible}) {
   if (!isVisible) return null;
@@ -45,4 +45,4 @@ const PreviewPane = ({
   </Pane>
 );
 
-export default connect( mapStateToProps, mapDispatchToProps )(PreviewPane)
+export default connect( mapStateToProps, mapDispatchToProps )(PreviewPane);
