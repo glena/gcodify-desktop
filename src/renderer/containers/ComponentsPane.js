@@ -46,13 +46,13 @@ const ComponentsPane = ({
   onClickLoad, onClickReload, onClickSave, 
 }) => (
   <Pane className="components">
-    <div>Brighness <Slider min={-1} max={1} value={imageBrighness} step={0.1} onChange={onChangeBrightness}></Slider> {imageBrighness}</div>
-    <div>Contrast <Slider min={-1} max={1} value={imageContrast} step={0.1} onChange={onChangeContrast} ></Slider> {imageContrast}</div>
-    <div>Pixel Threshold <Slider min={0} max={255} value={pixelThreshold} step={1} onChange={onChangeThreshold} ></Slider> {pixelThreshold}</div>
+    <div><label>Brighness</label> <Slider min={-1} max={1} value={imageBrighness} step={0.1} onChange={onChangeBrightness}></Slider> {imageBrighness}</div>
+    <div><label>Contrast</label> <Slider min={-1} max={1} value={imageContrast} step={0.1} onChange={onChangeContrast} ></Slider> {imageContrast}</div>
+    <div><label>Pixel Threshold</label> <Slider min={0} max={255} value={pixelThreshold} step={1} onChange={onChangeThreshold} ></Slider> {pixelThreshold}</div>
     <SizePane></SizePane>
     <LoadButton isLoaded={isLoaded} onClick={onClickLoad}></LoadButton>
-    <ReloadButton isLoaded={isLoaded} upToDate={upToDate} onClick={onClickReload}></ReloadButton>
     <SaveButton isLoaded={isLoaded} upToDate={upToDate} onClick={onClickSave}></SaveButton>
+    <ReloadButton isLoaded={isLoaded} upToDate={upToDate} onClick={onClickReload}></ReloadButton>
   </Pane>
 );
 

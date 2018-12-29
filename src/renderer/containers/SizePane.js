@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch) => ({
 function InputField({label, value, onChange, isVisible}) {
   if (!isVisible) return null;
   return (<div>
-    {label} <Input value={value} onChange={onChange}></Input>
+    <label>{label}</label> <Input value={value} onChange={onChange}></Input>
   </div>);
 }
 

@@ -24,6 +24,8 @@ export const load = () => ({ type: 'LOAD' });
 export const reload = () => ({ type: 'RELOAD' });
 export const save = () => ({ type: 'SAVE' });
 
+export const togglePane = (value) => ({ type: 'TOGGLE_PANE', value });
+
 export const resize = (value) => ({ type: 'RESIZE', value });
 export const viewOriginal  = () => ({ type: 'TOGGLE_PREVIEW', value: true });
 export const viewPreview = () => ({ type: 'TOGGLE_PREVIEW', value: false });

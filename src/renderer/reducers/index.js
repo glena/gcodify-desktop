@@ -28,7 +28,8 @@ const mappers = {
     },
     upToDate: true
   }),
-  TOGGLE_PREVIEW: (action) => ({ showOriginal: action.value} )
+  TOGGLE_PREVIEW: (action) => ({ showOriginal: action.value} ),
+  TOGGLE_PANE: (action) => ({ visibleComponentsPane: action.value} )
 };
 
 const reducers = (state = [], action) => {

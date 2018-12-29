@@ -2,16 +2,17 @@ div.preview {
   float: left;
   width: 500px;
   min-height: 500px;
-  margin: 10px;
   position: relative;
   border: 1px #aaaaaa solid;
   border-left: none;
   border-bottom: none;
+  margin-left: 20px;
 
   .origin{
     position: absolute;
-    bottom: -20px;
+    bottom: -10px;
     left: -15px;
+    font-size: 10px;
   }
 
   &:before,&:after {
@@ -53,15 +54,52 @@ div.preview {
   }
 }
 
-div.components {
-  margin: 10px;
-}
-
 button {
   background: #3366AA;
   color: #FFF;
   padding: 0 10px;
   line-height: 30px;
   border: 1px solid #3366AA;
-  margin: 5px;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.tabs {
+  overflow: hidden;
+  width: 400px;
+  margin-left: 10px;
+  float: left;
+
+  .tabs-container {
+    overflow: hidden;
+    .tab {
+      float: left;
+      margin-right: 1px;
+      padding: 5px;
+      background: #3366AA;
+      border-bottom: none;
+      color: #ffffff;
+      cursor: pointer;
+
+      &:hover, &.selected {
+        color: rgb(11, 50, 100);
+        background: rgb(145, 184, 236);
+      }
+    }
+  }
+
+  .tabs-content {
+    border: 1px solid #3366AA;
+    padding: 5px;
+  }
+}
+
+label {
+  width: 140px;
+  display: block;
+  float: left;
 }

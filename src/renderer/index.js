@@ -27,6 +27,7 @@ const store = configureStore({
     yOffset: 16,
     zOffset: 90,
   },
+  visibleComponentsPane: 'components',
   isResized: false,
 });
 
