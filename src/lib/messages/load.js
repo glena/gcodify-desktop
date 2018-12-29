@@ -1,11 +1,13 @@
 import { pick } from 'lodash';
-import { baseProps, offsetProps, printProps, imgManipulationProps } from './fields_enum';
+import { baseProps, offsetProps, printProps, imgManipulationProps, imageProps, sizeProps } from './fields_enum';
 
 export function build(state) {
-  return Object.assign({ type: 'LOAD', width: '50' }, pick(state, [
+  const imageData = state.image ? pick(state.image, imageProps) : {};
+  return Object.assign({ type: 'LOAD', isResized: state.isResized }, imageData, pick(state.settings, [
     ...baseProps, 
     ...offsetProps, 
     ...printProps,
+    ...sizeProps, 
     ...imgManipulationProps
   ]));
 }

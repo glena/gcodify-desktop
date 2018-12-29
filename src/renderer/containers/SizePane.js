@@ -10,9 +10,10 @@ import Checkbox from '../components/Checkbox';
 import { resize, change } from '../actions';
 
 const mapStateToProps = state => {
-  return Object.assign({
+  return {
     isResized: state.isResized,
-  }, pick(state, ['height', 'width', 'xOffset', 'yOffset', 'zOffset']));
+    ...pick(state.settings, ['height', 'width', 'xOffset', 'yOffset', 'zOffset'])
+  };
 };
 
 const mapDispatchToProps = (dispatch) => ({

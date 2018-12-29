@@ -1,4 +1,5 @@
-export const baseProps = ['originalFilename', 'laserPrecision'];
+export const baseProps = ['laserPrecision'];
+export const imageProps = ['originalFilename'];
 export const printProps = ['travelSpeed', 'laserSpeed', 'laserOffCode', 'laserOnCode'];
 export const sizeProps = ['isResized', 'height', 'width'];
 export const offsetProps = ['xOffset', 'yOffset', 'zOffset'];

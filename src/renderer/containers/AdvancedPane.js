@@ -9,7 +9,7 @@ import Input from '../components/Input';
 import { change } from '../actions';
 
 const mapStateToProps = state => {
-  return pick(state, ['laserPrecision', 'laserOnCode', 'laserOffCode', 'laserSpeed', 'travelSpeed']);
+  return pick(state.settings, ['laserPrecision', 'laserOnCode', 'laserOffCode', 'laserSpeed', 'travelSpeed']);
 };
 
 const mapDispatchToProps = (dispatch) => ({

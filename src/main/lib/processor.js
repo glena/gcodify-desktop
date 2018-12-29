@@ -1,5 +1,3 @@
-/* global __static */
-
 import * as gcodify from 'gcodify';
 import * as path from 'path';
 import * as fs from 'fs';

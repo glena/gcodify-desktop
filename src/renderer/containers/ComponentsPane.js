@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { pick } from 'lodash';
 import { connect } from 'react-redux';
 
 import Pane from '../components/Pane';
@@ -10,15 +11,11 @@ import SizePane from './SizePane';
 
 import { change, load, reload, save } from '../actions';
 
-const mapStateToProps = state => {
-  return {
-    imageContrast: state.imageContrast,
-    imageBrighness: state.imageBrighness,
-    pixelThreshold: state.pixelThreshold,
-    isLoaded: !!state.originalFilename,
-    upToDate: state.upToDate,
-  };
-};
+const mapStateToProps = state => ({
+  isLoaded: !!state.image,
+  upToDate: state.upToDate,
+  ...pick(state.settings, ['imageContrast', 'imageBrighness', 'pixelThreshold'])
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onClickLoad: () => dispatch(load()),
@@ -34,7 +31,7 @@ function LoadButton({isLoaded, onClick}) {
   return (<Button onClick={onClick}>Load</Button>);
 }
 function ReloadButton({isLoaded, upToDate, onClick}) {
-  if (!isLoaded) return null;
+  if (!isLoaded || upToDate) return null;
   return (<Button disabled={upToDate} onClick={onClick}>Reload</Button>);
 }
 function SaveButton({isLoaded, upToDate, onClick}) {

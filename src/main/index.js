@@ -1,9 +1,5 @@
 'use strict';
 
-/* global process */
-/* global __dirname */
-/* global setImmediate */
-
 import { app, BrowserWindow, ipcMain } from 'electron';
 import * as path from 'path';
 import { format as formatUrl } from 'url';
